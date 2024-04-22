@@ -1,1 +1,217 @@
+<!DOCTYPE html>
+<html lang="en>
+  <head>
+    <title>Social Media Page</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+      }
 
+      header {
+        background-color: #333;
+        color: #fff;
+        display: flex;
+        justify-content: space-between;
+        padding: 10px 20px;
+      }
+
+      header a {
+        color: #fff;
+        text-decoration: none;
+      }
+
+      #photo-feed {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin: 20px;
+      }
+
+      .photo {
+        background-color: #eee;
+        border: 1px solid #ddd;
+        margin: 10px;
+        padding: 10px;
+        width: calc(33.333% - 20px);
+      }
+
+      .photo img {
+        width: 100%;
+      }
+
+      .like-button {
+        background-color: #fff;
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 40px;
+        width: 40px;
+        margin-top: 10px;
+      }
+
+      .like-button:hover {
+        background-color: #f0f0f0;
+      }
+
+      .like-button i {
+        color: #333;
+        font-size: 20px;
+        transition: color 0.2s ease-in-out;
+      }
+
+      .like-button.liked i {
+        color: red;
+      }
+
+      .share-button {
+        background-color: #fff;
+        border: none;
+        padding: 10px;
+        margin-left: 10px;
+      }
+
+      .share-button:hover {
+        background-color: #f0f0f0;
+      }
+
+      .like-counter,
+      .comment-counter {
+        display: inline-block;
+        font-size: 20px;
+        margin-left: 10px;
+        margin-top: 10px;
+      }
+
+      .comments {
+        margin-top: 20px;
+      }
+
+      .comment-list {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+      }
+
+      .comment {
+        margin-bottom: 10px;
+      }
+
+      .comment-input {
+        width: 100%;
+        margin-bottom: 10px;
+      }
+
+      .post-comment-button {
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        padding: 10px;
+        width: 100%;
+      }
+
+      .post-comment-button:hover {
+        background-color: #0062cc;
+      }
+
+      footer {
+        background-color: #333;
+        color: #fff;
+        display: flex;
+        justify-content: space-between;
+        padding: 10px 20px;
+      }
+
+      footer a {
+        color: #fff;
+        text-decoration: none;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Social Media Page</h1>
+      <nav>
+        <ul>
+          <li><a href="#">Home</a></li>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Contact</a></li>
+          <li><a href="#">Login</a></li>
+        </ul>
+      </nav>
+    </header>
+    <main>
+      <section id="photo-feed">
+        <h2>Photo Feed</h2>
+        <div class="photo">
+          <img src="photo1.jpg" alt="Photo 1">
+          <button class="like-button" onclick="likePhoto(this)">Like</button>
+          <span class="like-counter">0</span>
+          <button class="share-button" onclick="sharePhoto(this)">Share</button>
+          <div class="comments">
+            <h3>Comments</h3>
+            <ul class="comment-list">
+              <li>Comment 1</li>
+              <li>Comment 2</li>
+              <li>Comment 3</li>
+            </ul>
+            <form id="comment-form">
+              <label for="comment-input" class="visually-hidden">Comment:</label>
+              <input type="text" class="comment-input" id="comment-input" placeholder="Add a comment...">
+              <button type="submit" class="post-comment-button">Post</button>
+            </form>
+          </div>
+        </div>
+        <!-- More photos here -->
+      </section>
+    </main>
+    <footer>
+      <p>&copy; 2023 Social Media Page. All rights reserved.</p>
+      <ul>
+        <li><a href="https://twitter.com">Twitter</a></li>
+        <li><a href="https://instagram.com">Instagram</a></li>
+      </ul>
+    </footer>
+    <script>
+      let likeButton = document.querySelector('.like-button');
+      let likeCounter = document.querySelector('.like-counter');
+      let shareButton = document.querySelector('.share-button');
+      let commentForm = document.querySelector('#comment-form');
+      let commentInput = document.querySelector('.comment-input');
+      let commentList = document.querySelector('.comment-list');
+
+      let currentPhoto = {};
+
+      function likePhoto(button) {
+        if (button.classList.contains('liked')) {
+          button.classList.remove('liked');
+          likeCounter.textContent = parseInt(likeCounter.textContent) - 1;
+        } else {
+          button.classList.add('liked');
+          likeCounter.textContent = parseInt(likeCounter.textContent) + 1;
+        }
+      }
+
+      function sharePhoto(button) {
+        // Add sharing functionality here
+      }
+
+      function postComment(event) {
+        event.preventDefault();
+        let commentText = commentInput.value;
+        if (commentText.trim() !== '') {
+          let comment = document.createElement('li');
+          comment.textContent = commentText;
+          commentList.appendChild(comment);
+          commentInput.value = '';
+        }
+      }
+
+      commentForm.addEventListener('submit', postComment);
+    </script>
+  </body>
+</html>
